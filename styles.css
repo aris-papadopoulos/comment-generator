@@ -51,9 +51,8 @@ a{
     margin: 45px 0 0 0;
 }
 
-#logo img{
-    float: left;
-    width: 100%;
+#logo svg{
+    width: 64px;
 }
 
 #nav{
@@ -66,6 +65,11 @@ a{
     float: left;
     font-size: 1em;
     list-style: none;
+}
+
+#nav svg {
+    width: 20px;
+    height: auto;
 }
 
 #nav li a{
@@ -138,8 +142,9 @@ a{
     margin-left: 0.5em;
 }
 
-#features img{
+#features svg{
     width: 2em;
+    height: auto;
     display: inline-block;
     vertical-align: middle;
 }
@@ -266,6 +271,14 @@ box-sizing: border-box;
     justify-content: space-between;
     position: relative;
     width: 100%;
+}
+.comment-element svg {
+    width: 20px;
+    height: auto;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
 }
 span {
     color: #0064a0;
