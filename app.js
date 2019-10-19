@@ -147,6 +147,11 @@ const adverbs = [
 ]
 const interjections = ['wow! ', 'wow, ', ''];
 
+function getRandomItem(category, probabilities) {
+    const randomItem = weightedRand(probabilities);
+    item = category[randomItem()];
+    return item;
+}
 
 function generateComment() {
     switch(type.name) {
