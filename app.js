@@ -16,10 +16,33 @@ function weightedRand(spec) {
 var rand012 = weightedRand({0:0.8, 1:0.1, 2:0.1});
 rand012(); // random in distribution...
 
+const typeProbabilities = { 0: 0.21, 1: 0.24, 2: 0.23, 3: 0.24, 4: 0.08 }
 const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 }
 const adjectiveDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.05 }
 const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 }
 
+const types = [
+    {
+        name: 'Adjective',
+        following: adjectiveProbabilities, // Use Default
+    },
+    {
+        name: 'Adjective + Noun',
+        following: adjectiveProbabilities // Use Default
+    },
+    {
+        name: 'Adverb + Adjective',
+        following: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 } // Use Default
+    },
+    {
+        name: 'Adverb + Adjective + Noun',
+        following: adjectiveProbabilities // Use Default
+    },
+    {
+        name: 'Something about view or colors',
+        following: adjectiveProbabilities // Use Default
+    }
+]
 
 const nouns = ['view', 'photo', 'colors', 'pic', 'picture', 'scenery', 'spot', 'landscape', 'shot', 'frame'];
 const adjectives = [
