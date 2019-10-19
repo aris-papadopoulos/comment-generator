@@ -146,3 +146,26 @@ const adverbs = [
     },
 ]
 const interjections = ['wow! ', 'wow, ', ''];
+
+
+function generateComment() {
+    switch(type.name) {
+        case 'Adjective':
+            console.log(type.name)
+            break;
+        case 'Adjective + Noun': 
+            console.log(type.name)
+            break;
+        case 'Adverb + Adjective': 
+            console.log(type.name)
+            break;
+        case 'Adverb + Adjective + Noun': 
+            console.log(type.name)
+            break;
+        case 'Something about view or colors': 
+            console.log(type.name)
+            break;
+        default:
+            return 'Something went wrong. Try again.';
+    }
+}
