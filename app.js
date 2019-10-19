@@ -188,3 +188,10 @@ function generateComment() {
             return 'Something went wrong. Try again.';
     }
 }
+
+
+document.getElementById('generate-comment').onclick=function(){
+    const comment = generateComment();
+    console.log(comment.type);
+    document.getElementById('comment-text').innerHTML = comment.text;
+}
