@@ -13,9 +13,6 @@ function weightedRand(spec) {
     }
 }
 
-var rand012 = weightedRand({0:0.8, 1:0.1, 2:0.1});
-rand012(); // random in distribution...
-
 const typeProbabilities = { 0: 0.21, 1: 0.24, 2: 0.23, 3: 0.24, 4: 0.08 }
 const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 }
 const adjectiveDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.05 }
@@ -154,22 +151,35 @@ function getRandomItem(category, probabilities) {
 }
 
 function generateComment() {
+    const type = getRandomItem(types, typeProbabilities);
+    const adverb = getRandomItem(adverbs, adverbProbabilities);
+    const adjective = getRandomItem(adjectives, adjectiveProbabilities);
+    const adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
+    const adjectiveNoun = getRandomItem(nouns, adjective.nouns);
+    const interjection = getRandomItem(interjections, interjectionProbabilities);
+    // console.log(type, adverb, adjective, adverbAdjective, adjectiveNoun, interjection);
     switch(type.name) {
         case 'Adjective':
             console.log(type.name)
-            break;
+            console.log(adjective)
+            return `${interjection}${adjective.name}`;
         case 'Adjective + Noun': 
             console.log(type.name)
-            break;
+            console.log(adjective, adjectiveNoun)
+            return `${interjection}${adjective.name} ${adjectiveNoun}`;
         case 'Adverb + Adjective': 
             console.log(type.name)
-            break;
+            console.log(adverb, adverbAdjective)
+            return `${interjection}${adverb.name} ${adverbAdjective.name}`;
         case 'Adverb + Adjective + Noun': 
             console.log(type.name)
-            break;
+            console.log(adverb, adverbAdjective, adjectiveNoun)
+            return `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}`;
+
+
         case 'Something about view or colors': 
             console.log(type.name)
-            break;
+            return;
         default:
             return 'Something went wrong. Try again.';
     }
