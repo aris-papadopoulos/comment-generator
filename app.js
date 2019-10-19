@@ -21,11 +21,11 @@ const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 }
 const types = [
     {
         name: 'Adjective',
-        following: adjectiveProbabilities, // Use Default
+        following: adjectiveDefaultProbabilities, // Use Default
     },
     {
         name: 'Adjective + Noun',
-        following: adjectiveProbabilities // Use Default
+        following: adjectiveDefaultProbabilities // Use Default
     },
     {
         name: 'Adverb + Adjective',
@@ -33,11 +33,11 @@ const types = [
     },
     {
         name: 'Adverb + Adjective + Noun',
-        following: adjectiveProbabilities // Use Default
+        following: adjectiveDefaultProbabilities // Use Default
     },
     {
         name: 'Something about view or colors',
-        following: adjectiveProbabilities // Use Default
+        following: adjectiveDefaultProbabilities // Use Default
     }
 ]
 
@@ -142,7 +142,7 @@ const adverbs = [
         adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
     },
 ]
-const interjections = ['wow! ', 'wow, ', ''];
+const interjections = ['Wow! ', 'Wow, ', ''];
 
 function getRandomItem(category, probabilities) {
     const randomItem = weightedRand(probabilities);
@@ -152,34 +152,38 @@ function getRandomItem(category, probabilities) {
 
 function generateComment() {
     const type = getRandomItem(types, typeProbabilities);
-    const adverb = getRandomItem(adverbs, adverbProbabilities);
-    const adjective = getRandomItem(adjectives, adjectiveProbabilities);
+    const adverb = getRandomItem(adverbs, adverbDefaultProbabilities);
+    const adjective = getRandomItem(adjectives, adjectiveDefaultProbabilities);
     const adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
     const adjectiveNoun = getRandomItem(nouns, adjective.nouns);
-    const interjection = getRandomItem(interjections, interjectionProbabilities);
-    // console.log(type, adverb, adjective, adverbAdjective, adjectiveNoun, interjection);
+    const interjection = getRandomItem(interjections, interjectionDefaultProbabilities);
+    console.log(type, adverb, adjective, adverbAdjective, adjectiveNoun, interjection);
     switch(type.name) {
         case 'Adjective':
-            console.log(type.name)
-            console.log(adjective)
-            return `${interjection}${adjective.name}`;
+            return {
+                text: `${interjection}${adjective.name}`,
+                type: type.name
+            }
         case 'Adjective + Noun': 
-            console.log(type.name)
-            console.log(adjective, adjectiveNoun)
-            return `${interjection}${adjective.name} ${adjectiveNoun}`;
+            return {
+                text: `${interjection}${adjective.name} ${adjectiveNoun}`,
+                type: type.name
+            }
         case 'Adverb + Adjective': 
-            console.log(type.name)
-            console.log(adverb, adverbAdjective)
-            return `${interjection}${adverb.name} ${adverbAdjective.name}`;
+            return {
+                text: `${interjection}${adverb.name} ${adverbAdjective.name}`,
+                type: type.name
+            }
         case 'Adverb + Adjective + Noun': 
-            console.log(type.name)
-            console.log(adverb, adverbAdjective, adjectiveNoun)
-            return `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}`;
-
-
+            return {
+                text: `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}`,
+                type: type.name
+            }
         case 'Something about view or colors': 
-            console.log(type.name)
-            return;
+            return {
+                text: ``,
+                type: type.name
+            }
         default:
             return 'Something went wrong. Try again.';
     }
