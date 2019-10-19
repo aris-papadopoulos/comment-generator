@@ -36,6 +36,10 @@ const types = [
         following: adjectiveDefaultProbabilities // Use Default
     },
     {
+        name: 'Interjection',
+        following: interjectionDefaultProbabilities // Use Default
+    },
+    {
         name: 'Something about view or colors',
         following: adjectiveDefaultProbabilities // Use Default
     }
@@ -178,6 +182,11 @@ function generateComment() {
             return {
                 text: `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}`,
                 type: type.name
+            }
+        case 'Interjection':
+            return {
+                text: interjections[0],
+                type: 'Interjection'
             }
         case 'Something about view or colors': 
             return {
