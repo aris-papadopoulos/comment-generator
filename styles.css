@@ -86,11 +86,10 @@ a{
     align-items: center;
     flex-direction: column;
     width: 100%;
-    text-align: center;
 }
 
 #intro h1{
-    font-size: 2.65em;
+    font-size: .875rem;
     margin: 3.5em 0 0 0;
     padding: 0;
     line-height: 1.2em;
@@ -263,26 +262,21 @@ box-sizing: border-box;
 }
 .comment__author-profile>span:last-of-type {
     margin-left: .625rem;
+    color: #455a64;
 }
 .comment-element {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     position: relative;
     width: 100%;
 }
 .comment-element svg {
-    width: 20px;
+    width: 16px;
     height: auto;
     position: absolute;
     right: 0;
-    padding: 10px;
+    padding: 8px;
     cursor: pointer;
-}
-span {
-    color: #0064a0;
-    text-decoration: none;
 }
 .profile-picture, .profile-picture img {
     display: flex;
@@ -291,6 +285,9 @@ span {
     border-radius: 50%;
 }
 .comment-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: .875rem;
     width: calc(100% - 48px - .625rem);
     margin: 0 0 0 calc(48px + .625rem);
     color: #455a64;
@@ -300,5 +297,5 @@ span {
     resize: none;
     min-height: 32px;
     border-radius: 0 0 0 8px;
-    padding: .3125rem 2.5rem .3125rem .3125rem;
+    padding: 0 .3125rem;
 }
