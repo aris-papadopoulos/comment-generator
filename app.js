@@ -1,3 +1,7 @@
+/**
+ * Generic function for randomly returning an item position in array, given the probabilities
+ * @param {*} spec 
+ */
 function weightedRand(spec) {
     var i, j, table=[];
     for (i in spec) {
@@ -23,7 +27,7 @@ const nounDefaultProbabilities = { 0: 0.15, 1: 0.1, 2: 0.15, 3: 0.05, 4: 0.1, 5:
 const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 };
 const exclamationMarkProbabilities = { 0: 0.25, 1: 0.55, 2: 0.2 };
 
-
+// Comment Types
 const types = [
     {
         name: 'Adjective',
@@ -51,6 +55,7 @@ const types = [
     }
 ]
 
+// Main Comment Entities
 const nouns = ['view', 'photo', 'colors', 'pic', 'picture', 'scenery', 'spot', 'landscape', 'shot', 'frame'];
 const adjectives = [
     {
@@ -172,21 +177,35 @@ const adverbs = [
 const interjections = ['Wow! ', 'Wow, ', ''];
 const exclamationMarkArray = ['', '!', '!!'];
 
+
+/**
+ * Main function for getting an item from a given category randomly, but based on probabilities
+ * @param {Array} category 
+ * @param {Object} probabilities 
+ */
 function getRandomItem(category, probabilities) {
     const randomItem = weightedRand(probabilities);
     item = category[randomItem()];
     return item;
 }
 
+/**
+ * Main function for generating the comments
+ */
 function generateComment() {
+    // Comment type
     const type = getRandomItem(types, typeProbabilities);
+
+    // Comment entities
     const adverb = getRandomItem(adverbs, adverbDefaultProbabilities);
     const adjective = getRandomItem(adjectives, adjectiveDefaultProbabilities);
     const adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
     const adjectiveNoun = getRandomItem(nouns, adjective.nouns);
+
+    // Prefixes or Suffixes
     const interjection = getRandomItem(interjections, interjectionDefaultProbabilities);
     const exclamationMark = getRandomItem(exclamationMarkArray, exclamationMarkProbabilities);
-    console.log(type, adverb, adjective, adverbAdjective, adjectiveNoun, interjection);
+
     switch(type.name) {
         case 'Adjective':
             return {
@@ -223,7 +242,7 @@ function generateComment() {
     }
 }
 
-
+// Trigger event and rendering results to the DOM
 document.getElementById('generate-comment').onclick=function(){
     const comment = generateComment();
     console.log(comment.type);
