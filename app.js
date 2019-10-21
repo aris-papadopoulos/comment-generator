@@ -13,12 +13,16 @@ function weightedRand(spec) {
     }
 }
 
-const typeProbabilities = { 0: 0.21, 1: 0.24, 2: 0.23, 3: 0.24, 4: 0.08 }
+// Standard-Default Probabilities
+const typeProbabilities = { 0: 0.21, 1: 0.24, 2: 0.23, 3: 0.24, 4: 0.08 };
 
-const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 }
-const adjectiveDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.05, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.1 }
-const nounDefaultProbabilities = { 0: 0.15, 1: 0.1, 2: 0.15, 3: 0.05, 4: 0.1, 5: 0.05, 6: 0.1, 7: 0.1, 8: 0.15, 9: 0.05 }
-const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 }
+const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 };
+const adjectiveDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.05, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.1 };
+const nounDefaultProbabilities = { 0: 0.15, 1: 0.1, 2: 0.15, 3: 0.05, 4: 0.1, 5: 0.05, 6: 0.1, 7: 0.1, 8: 0.15, 9: 0.05 };
+
+const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 };
+const exclamationMarkProbabilities = { 0: 0.25, 1: 0.55, 2: 0.2 };
+
 
 const types = [
     {
@@ -162,7 +166,11 @@ const adverbs = [
         adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
 ]
+
+// Extras
+
 const interjections = ['Wow! ', 'Wow, ', ''];
+const exclamationMarkArray = ['', '!', '!!'];
 
 function getRandomItem(category, probabilities) {
     const randomItem = weightedRand(probabilities);
@@ -177,26 +185,27 @@ function generateComment() {
     const adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
     const adjectiveNoun = getRandomItem(nouns, adjective.nouns);
     const interjection = getRandomItem(interjections, interjectionDefaultProbabilities);
+    const exclamationMark = getRandomItem(exclamationMarkArray, exclamationMarkProbabilities);
     console.log(type, adverb, adjective, adverbAdjective, adjectiveNoun, interjection);
     switch(type.name) {
         case 'Adjective':
             return {
-                text: `${interjection}${adjective.name}`,
+                text: `${interjection}${adjective.name}${exclamationMark}`,
                 type: type.name
             }
         case 'Adjective + Noun': 
             return {
-                text: `${interjection}${adjective.name} ${adjectiveNoun}`,
+                text: `${interjection}${adjective.name} ${adjectiveNoun}${exclamationMark}`,
                 type: type.name
             }
         case 'Adverb + Adjective': 
             return {
-                text: `${interjection}${adverb.name} ${adverbAdjective.name}`,
+                text: `${interjection}${adverb.name} ${adverbAdjective.name}${exclamationMark}`,
                 type: type.name
             }
         case 'Adverb + Adjective + Noun': 
             return {
-                text: `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}`,
+                text: `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}${exclamationMark}`,
                 type: type.name
             }
         case 'Interjection':
@@ -206,7 +215,7 @@ function generateComment() {
             }
         case 'Something about view or colors': 
             return {
-                text: `The ${noun} is ${adverb.name} ${adjective.name}`,
+                text: `The ${noun} is ${adverb.name} ${adjective.name}${exclamationMark}`,
                 type: type.name
             }
         default:
