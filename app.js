@@ -14,10 +14,11 @@ function weightedRand(spec) {
 }
 
 const typeProbabilities = { 0: 0.21, 1: 0.24, 2: 0.23, 3: 0.24, 4: 0.08 }
+
 const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 }
 const adjectiveDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.05, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.1 }
+const nounDefaultProbabilities = { 0: 0.15, 1: 0.1, 2: 0.15, 3: 0.05, 4: 0.1, 5: 0.05, 6: 0.1, 7: 0.1, 8: 0.15, 9: 0.05 }
 const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 }
-const typeVCnounProbabilities = { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 }
 
 const types = [
     {
@@ -30,7 +31,7 @@ const types = [
     },
     {
         name: 'Adverb + Adjective',
-        following: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 } // Use Default
+        following: { 0: 0.3, 1: 0, 2: 0, 3: 0, 4: 0.20, 5: 0.15, 6: 0.15, 7: 0.20, 8: 0, 9: 0 }
     },
     {
         name: 'Adverb + Adjective + Noun',
@@ -42,16 +43,15 @@ const types = [
     },
     {
         name: 'Something about view or colors',
-        following: adjectiveDefaultProbabilities // Use Default
+        following: { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 }
     }
 ]
 
 const nouns = ['view', 'photo', 'colors', 'pic', 'picture', 'scenery', 'spot', 'landscape', 'shot', 'frame'];
-const defaultNounProbabilities = { 0: 0.15, 1: 0.1, 2: 0.15, 3: 0.05, 4: 0.1, 5: 0.05, 6: 0.1, 7: 0.1, 8: 0.15, 9: 0.05 }
 const adjectives = [
     {
         name: 'nice',
-        nouns: defaultNounProbabilities
+        nouns: nounDefaultProbabilities
     },
     {
         name: 'amazing',
@@ -75,7 +75,7 @@ const adjectives = [
     },
     {
         name: 'perfect',
-        nouns: defaultNounProbabilities
+        nouns: nounDefaultProbabilities
     },
     {
         name: 'unique',
@@ -83,11 +83,11 @@ const adjectives = [
     },
     {
         name: 'dreamy',
-        nouns: defaultNounProbabilities
+        nouns: nounDefaultProbabilities
     },
     {
         name: 'marvelous',
-        nouns: defaultNounProbabilities
+        nouns: nounDefaultProbabilities
     },
     {
         name: 'calm',
@@ -95,15 +95,15 @@ const adjectives = [
     },
     {
         name: 'great',
-        nouns: defaultNounProbabilities
+        nouns: nounDefaultProbabilities
     },
     {
         name: 'impressive',
-        nouns: defaultNounProbabilities
+        nouns: nounDefaultProbabilities
     },
     {
         name: 'stunning',
-        nouns: defaultNounProbabilities
+        nouns: nounDefaultProbabilities
     },
     {
         name: 'breathtaking',
@@ -113,43 +113,53 @@ const adjectives = [
 const adverbs = [
     {
         name: 'So',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'Such',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'Such a',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'Such an',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'Really',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.05, 5: 0.1, 6: 0.05, 7: 0.1, 8: 0.05, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0.1 },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'Truly',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { 0: 0, 1: 0.1, 2: 0.1, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0.1, 10: 0, 11: 0.1, 12: 0.1, 13: 0.05, 14: 0 },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'Very',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { 0: 0.1, 1: 0.05, 2: 0.1, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0, 7: 0.1, 8: 0.1, 9: 0, 10: 0.1, 11: 0, 12: 0.1, 13: 0.05, 14: 0 },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'How',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.1, 14: 0.05 },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'What a',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'What an',
-        adjectives: { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0.10, 11: 0.10, 12: 0.10, 13: 0.10 }
+        adjectives: { },
+        adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
 ]
 const interjections = ['Wow! ', 'Wow, ', ''];
