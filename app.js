@@ -245,8 +245,9 @@ function generateComment() {
             noun = getRandomItem(nouns, typeVCnounProbabilities);
             adverb = getRandomItem(adverbs, typeAAadverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
+            const isPlural = (noun === 'colors') ? true : false;
             return {
-                text: `The ${noun} is ${adverb.name.toLowerCase()} ${adverbAdjective.name}${exclamationMark}`,
+                text: `The ${noun} ${(isPlural) ? 'are' : 'is'} ${adverb.name.toLowerCase()} ${adverbAdjective.name}${exclamationMark}`,
                 type: type.name
             }
         default:
