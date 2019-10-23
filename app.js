@@ -246,7 +246,7 @@ function generateComment() {
             adverb = getRandomItem(adverbs, typeAAadverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
             return {
-                text: `The ${noun} is ${adverb.name} ${adverbAdjective.name}${exclamationMark}`,
+                text: `The ${noun} is ${adverb.name.toLowerCase()} ${adverbAdjective.name}${exclamationMark}`,
                 type: type.name
             }
         default:
