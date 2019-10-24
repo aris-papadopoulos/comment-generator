@@ -28,6 +28,7 @@ const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 };
 const exclamationMarkProbabilities = { 0: 0.25, 1: 0.55, 2: 0.2 };
 
 const typeVCnounProbabilities = { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
+const typeVCadverbProbabilities = { 0: 0.4, 1: 0, 2: 0, 3: 0, 4: 0.24, 5: 0.18, 6: 0.18, 7: 0, 8: 0, 9: 0 };
 const typeAAadverbProbabilities = { 0: 0.3, 1: 0, 2: 0, 3: 0, 4: 0.20, 5: 0.15, 6: 0.15, 7: 0.20, 8: 0, 9: 0 };
 
 // Comment Types
@@ -155,12 +156,12 @@ const adverbs = [
     },
     {
         name: 'Very',
-        adjectives: { 0: 0.1, 1: 0.05, 2: 0.1, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0, 7: 0.1, 8: 0.1, 9: 0, 10: 0.1, 11: 0, 12: 0.1, 13: 0.05, 14: 0 },
+        adjectives: { 0: 0.1, 1: 0, 2: 0.1, 3: 0, 4: 0.1, 5: 0.1, 6: 0, 7: 0.1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0.1, 13: 0.05, 14: 0 },
         adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
         name: 'How',
-        adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.1, 14: 0.05 },
+        adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.05, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.04, 11: 0.05, 12: 0.1, 13: 0.1, 14: 0.03 },
         adjectivesWithNoun: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
     },
     {
@@ -206,7 +207,6 @@ function generateComment() {
     const interjection = getRandomItem(interjections, interjectionDefaultProbabilities);
     const exclamationMark = getRandomItem(exclamationMarkArray, exclamationMarkProbabilities);
 
-    console.log(adverb, adverbAdjective);
     switch(type.name) {
         case 'Adjective':
             adjective = getRandomItem(adjectives, adjectiveDefaultProbabilities);
@@ -222,8 +222,9 @@ function generateComment() {
                 type: type.name
             }
         case 'Adverb + Adjective': 
-            adverb = getRandomItem(adverbs, adverbDefaultProbabilities);
+            adverb = getRandomItem(adverbs, typeAAadverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
+            console.log(adverb, adverbAdjective);
             return {
                 text: `${interjection}${adverb.name} ${adverbAdjective.name}${exclamationMark}`,
                 type: type.name
@@ -232,6 +233,7 @@ function generateComment() {
             adverb = getRandomItem(adverbs, adverbDefaultProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectivesWithNoun);
             adjectiveNoun = getRandomItem(nouns, adverbAdjective.nouns);
+            console.log(adverb, adverbAdjective, adjectiveNoun);
             return {
                 text: `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}${exclamationMark}`,
                 type: type.name
@@ -243,7 +245,7 @@ function generateComment() {
             }
         case 'Something about view or colors': 
             noun = getRandomItem(nouns, typeVCnounProbabilities);
-            adverb = getRandomItem(adverbs, typeAAadverbProbabilities);
+            adverb = getRandomItem(adverbs, typeVCadverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
             const isPlural = (noun === 'colors') ? true : false;
             return {
