@@ -192,6 +192,7 @@ const adverbs = [
 
 const interjections = ['Wow! ', 'Wow, ', ''];
 const exclamationMarkArray = ['', '!', '!!'];
+const textTransform = [false, true];
 
 
 /**
@@ -209,62 +210,109 @@ function getRandomItem(category, probabilities) {
  * Main function for generating the comments
  */
 function generateComment() {
+
     // Comment type
     const type = getRandomItem(types, typeProbabilities);
 
     // Comment entities
     let adjective, adverb, adverbAdjective, noun, adjectiveNoun;
+    let output, text, lowerCaseProbabilities;
 
-    // Prefixes or Suffixes
+    // Prefixes and Suffixes
     const interjection = getRandomItem(interjections, interjectionDefaultProbabilities);
     const exclamationMark = getRandomItem(exclamationMarkArray, exclamationMarkProbabilities);
-    console.log(interjection);
+
+    // In case that "Wow, " comes up, the following code will return the whole sentence as lower case. 
+    let needsLowerCase;
+    (interjection === interjections[1]) ? needsLowerCase = true : needsLowerCase = false;
+
+    // If no special case is triggered, randomly choose lower case or not, else force lower case
+    (!needsLowerCase) ? lowerCaseProbabilities = { 0: 0.05, 1: 0.05 } : lowerCaseProbabilities = { 0: 0, 1: 1 };
+
+    // Randomly choose if the sentence will be lower case or not
+    const lowerCase = getRandomItem(textTransform, lowerCaseProbabilities);
 
     switch(type.name) {
+
         case 'Adjective':
+
+            // Randomly get words according to pattern
             adjective = getRandomItem(adjectives, adjectiveDefaultProbabilities);
+            // Defines the output and if lower case will be applied or not
+            output = `${interjection}${adjective.name}${exclamationMark}`;
+            (lowerCase) ? text = output.toLowerCase() : text = output;
+
             return {
-                text: `${interjection}${adjective.name}${exclamationMark}`,
+                text,
                 type: type.name
             }
+
         case 'Adjective + Noun': 
+
+            // Randomly get words according to pattern
             adjective = getRandomItem(adjectives, adjectiveDefaultProbabilities);
             adjectiveNoun = getRandomItem(nouns, adjective.nouns);
+            // Defines the output and if lower case will be applied or not
+            output = `${interjection}${adjective.name} ${adjectiveNoun}${exclamationMark}`;
+            (lowerCase) ? text = output.toLowerCase() : text = output;
+
             return {
-                text: `${interjection}${adjective.name} ${adjectiveNoun}${exclamationMark}`,
+                text,
                 type: type.name
             }
+
         case 'Adverb + Adjective': 
+        
+            // Randomly get words according to pattern
             adverb = getRandomItem(adverbs, typeAAadverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
-            console.log(adverb, adverbAdjective);
+            // Defines the output and if lower case will be applied or not
+            output = `${interjection}${adverb.name} ${adverbAdjective.name}${exclamationMark}`;
+            (lowerCase) ? text = output.toLowerCase() : text = output;
+
             return {
-                text: `${interjection}${adverb.name} ${adverbAdjective.name}${exclamationMark}`,
+                text,
                 type: type.name
             }
+
         case 'Adverb + Adjective + Noun': 
+
+            // Randomly get words according to pattern
             adverb = getRandomItem(adverbs, type4adverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.type4adjectives);
             adjectiveNoun = getRandomItem(nouns, adverb.type4nouns);
-            console.log(adverb, adverbAdjective, adjectiveNoun);
+            // Defines the output and if lower case will be applied or not
+            output = `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}${exclamationMark}`;
+            (lowerCase) ? text = output.toLowerCase() : text = output;
+
             return {
-                text: `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}${exclamationMark}`,
+                text,
                 type: type.name
             }
+
         case 'Interjection':
+
             return {
                 text: interjections[0],
                 type: 'Interjection'
             }
+
         case 'Something about view or colors': 
+            // Randomly get words according to pattern
             noun = getRandomItem(nouns, typeVCnounProbabilities);
             adverb = getRandomItem(adverbs, typeVCadverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
+            // Detects plural form. Defines the use of words in the output
             const isPlural = (noun === 'colors') ? true : false;
+            // Defines the output and if lower case will be applied or not
+            output = `The ${noun} ${(isPlural) ? 'are' : 'is'} ${adverb.name.toLowerCase()} ${adverbAdjective.name}${exclamationMark}`;
+            (lowerCase) ? text = output.toLowerCase() : text = output;
+
             return {
-                text: `The ${noun} ${(isPlural) ? 'are' : 'is'} ${adverb.name.toLowerCase()} ${adverbAdjective.name}${exclamationMark}`,
+                text,
                 type: type.name
             }
+
         default:
             return 'Something went wrong. Try again.';
     }
