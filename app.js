@@ -31,6 +31,8 @@ const typeVCnounProbabilities = { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 
 const typeVCadverbProbabilities = { 0: 0.4, 1: 0, 2: 0, 3: 0, 4: 0.24, 5: 0.18, 6: 0.18, 7: 0, 8: 0, 9: 0 };
 const typeAAadverbProbabilities = { 0: 0.3, 1: 0, 2: 0, 3: 0, 4: 0.20, 5: 0.15, 6: 0.15, 7: 0.20, 8: 0, 9: 0 };
 
+const type4adverbProbabilities = { 0: 0, 1: 0.12, 2: 0.17, 3: 0.04, 4: 0.1, 5: 0.06, 6: 0.08, 7: 0, 8: 0.17, 9: 0.12 }
+
 // Comment Types
 const types = [
     {
@@ -127,61 +129,62 @@ const adverbs = [
     {
         name: 'So',
         adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { },
+        type4nouns: { }
     },
     {
         name: 'Such',
         adjectives: { },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0, 11: 0, 12: 0.1, 13: 0.1, 14: 0.1 },
+        type4nouns: { 0: 0, 1: 0, 2: 0.1, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 }
     },
     {
         name: 'Such a',
         adjectives: { },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { 0: 0.1, 1: 0, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0, 11: 0.05, 12: 0, 13: 0.1, 14: 0.1 },
+        type4nouns: { 0: 0.1, 1: 0.1, 2: 0, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05 }
     },
     {
         name: 'Such an',
         adjectives: { },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { 0: 0, 1: 0.1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0.1, 13: 0, 14: 0 },
+        type4nouns: { 0: 0.1, 1: 0.1, 2: 0, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05 }
     },
     {
         name: 'Really',
         adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.05, 5: 0.1, 6: 0.05, 7: 0.1, 8: 0.05, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0.1 },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { 0: 0.1, 1: 0.04, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.03, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0.1 },
+        type4nouns: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0.05, 7: 0.1, 8: 0.1, 9: 0.05 }
     },
     {
         name: 'Truly',
         adjectives: { 0: 0, 1: 0.1, 2: 0.1, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0.1, 10: 0, 11: 0.1, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { 0: 0.1, 1: 0.04, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.03, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0.1 },
+        type4nouns: nounDefaultProbabilities
     },
     {
         name: 'Very',
         adjectives: { 0: 0.1, 1: 0, 2: 0.1, 3: 0, 4: 0.1, 5: 0.1, 6: 0, 7: 0.1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
+        type4adjectives: { 0: 0.1, 1: 0, 2: 0.1, 3: 0, 4: 0, 5: 0.1, 6: 0, 7: 0.03, 8: 0.1, 9: 0, 10: 0, 11: 0, 12: 0.1, 13: 0, 14: 0 },
+        type4nouns: nounDefaultProbabilities
     },
     {
         name: 'How',
         adjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.05, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.04, 11: 0.05, 12: 0.1, 13: 0.1, 14: 0.03 },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { },
+        type4nouns: { }
     },
     {
         name: 'What a',
         adjectives: { },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { 0: 0.1, 1: 0, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0, 11: 0.05, 12: 0, 13: 0.1, 14: 0.1 },
+        type4nouns: { 0: 0.1, 1: 0.1, 2: 0, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05 }
     },
     {
         name: 'What an',
         adjectives: { },
-        typeAANadjectives: { 0: 0.1, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05, 10: 0.1, 11: 0.05, 12: 0.1, 13: 0.05, 14: 0 },
-        typeAANnoun: { 0: 0.20, 1: 0, 2: 0.2, 3: 0, 4: 0, 5: 0.1, 6: 0.15, 7: 0.1, 8: 0.20, 9: 0.05 }
+        type4adjectives: { 0: 0, 1: 0.1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0.1, 13: 0, 14: 0 },
+        type4nouns: { 0: 0.1, 1: 0.1, 2: 0, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05 }
     },
 ]
 
@@ -215,6 +218,7 @@ function generateComment() {
     // Prefixes or Suffixes
     const interjection = getRandomItem(interjections, interjectionDefaultProbabilities);
     const exclamationMark = getRandomItem(exclamationMarkArray, exclamationMarkProbabilities);
+    console.log(interjection);
 
     switch(type.name) {
         case 'Adjective':
@@ -239,9 +243,9 @@ function generateComment() {
                 type: type.name
             }
         case 'Adverb + Adjective + Noun': 
-            adverb = getRandomItem(adverbs, adverbDefaultProbabilities);
-            adverbAdjective = getRandomItem(adjectives, adverb.typeAANadjectives);
-            adjectiveNoun = getRandomItem(nouns, adverbAdjective.nouns);
+            adverb = getRandomItem(adverbs, type4adverbProbabilities);
+            adverbAdjective = getRandomItem(adjectives, adverb.type4adjectives);
+            adjectiveNoun = getRandomItem(nouns, adverb.type4nouns);
             console.log(adverb, adverbAdjective, adjectiveNoun);
             return {
                 text: `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}${exclamationMark}`,
