@@ -196,7 +196,7 @@ box-sizing: border-box;
     #logo, #nav{
     float: none;
     display: block;
-    margin: 1.5em auto;
+    margin: .75em auto;
     }
     #nav{
     display: none;
@@ -210,7 +210,7 @@ box-sizing: border-box;
     #intro h1{
     font-size: 2em;
     text-align: center;
-    margin: 0;
+    margin: 0 0 .75em 0;
     }
     h2{
     font-size: 1.2em;
