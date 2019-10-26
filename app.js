@@ -324,3 +324,19 @@ document.getElementById('generate-comment').onclick=function(){
     console.log(comment.type);
     document.getElementById('comment-text').innerHTML = comment.text;
 }
+
+const copyToClipboard = str => {
+    const el = document.createElement('textarea');
+    el.value = str;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+};
+  
+document.getElementById('copy').onclick=function(){
+    const str = document.getElementById('comment-text').innerHTML;
+    if (str) {
+        copyToClipboard(str);
+    }
+}
