@@ -1,6 +1,6 @@
 /**
  * Generic function for randomly returning an item position in array, given the probabilities
- * @param {*} spec 
+ * @param {Object} spec - Object containing values that represent probability for
  */
 function weightedRand(spec) {
     var i, j, table=[];
@@ -18,20 +18,21 @@ function weightedRand(spec) {
 }
 
 // Standard-Default Probabilities
-const typeProbabilities = { 0: 0.16, 1: 0.20, 2: 0.18, 3: 0.18, 4: 0.12, 5: 0.16 };
+const typeProbabilities = { 0: 0.16, 1: 0.21, 2: 0.22, 3: 0.18, 4: 0.07, 5: 0.16 };
 
 const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 };
-const adjectiveDefaultProbabilities = { 0: 0.15, 1: 0.15, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05, 10: 0, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.1 };
-const nounDefaultProbabilities = { 0: 0.15, 1: 0.1, 2: 0.15, 3: 0.05, 4: 0.1, 5: 0.05, 6: 0.1, 7: 0.1, 8: 0.15, 9: 0.05 };
+const adjectiveDefaultProbabilities = { 0: 0.12, 1: 0.12, 2: 0.12, 3: 0.10, 4: 0.10, 5: 0.07, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.08, 10: 0, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.10 };
+const nounDefaultProbabilities = { 0: 0.14, 1: 0.1, 2: 0.14, 3: 0.06, 4: 0.1, 5: 0.06, 6: 0.1, 7: 0.1, 8: 0.14, 9: 0.06 };
 
 const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 };
 const exclamationMarkProbabilities = { 0: 0.25, 1: 0.55, 2: 0.2 };
 
-const typeVCnounProbabilities = { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
-const typeVCadverbProbabilities = { 0: 0.4, 1: 0, 2: 0, 3: 0, 4: 0.24, 5: 0.18, 6: 0.18, 7: 0, 8: 0, 9: 0 };
-const typeAAadverbProbabilities = { 0: 0.3, 1: 0, 2: 0, 3: 0, 4: 0.20, 5: 0.15, 6: 0.15, 7: 0.20, 8: 0, 9: 0 };
+// Type specific Probabilities 
+const type2adverbProbabilities = { 0: 0.3, 1: 0, 2: 0, 3: 0, 4: 0.20, 5: 0.15, 6: 0.15, 7: 0.20, 8: 0, 9: 0 };
+const type4adverbProbabilities = { 0: 0, 1: 0.12, 2: 0.17, 3: 0.04, 4: 0.1, 5: 0.06, 6: 0.08, 7: 0, 8: 0.17, 9: 0.12 };
+const type6adverbProbabilities = { 0: 0.4, 1: 0, 2: 0, 3: 0, 4: 0.24, 5: 0.18, 6: 0.18, 7: 0, 8: 0, 9: 0 };
+const type6nounProbabilities = { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
 
-const type4adverbProbabilities = { 0: 0, 1: 0.12, 2: 0.17, 3: 0.04, 4: 0.1, 5: 0.06, 6: 0.08, 7: 0, 8: 0.17, 9: 0.12 }
 
 // Comment Types
 const types = [
@@ -45,7 +46,7 @@ const types = [
     },
     {
         name: 'Adverb + Adjective',
-        following: typeAAadverbProbabilities
+        following: type2adverbProbabilities
     },
     {
         name: 'Adverb + Adjective + Noun',
@@ -57,12 +58,11 @@ const types = [
     },
     {
         name: 'Something about view or colors',
-        following: typeVCnounProbabilities
+        following: type6nounProbabilities
     }
 ]
 
 // Main Comment Entities
-const nouns = ['view', 'photo', 'colors', 'pic', 'picture', 'scenery', 'spot', 'landscape', 'shot', 'frame'];
 const adjectives = [
     {
         name: 'nice',
@@ -187,9 +187,9 @@ const adverbs = [
         type4nouns: { 0: 0.1, 1: 0.1, 2: 0, 3: 0.05, 4: 0.1, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.05 }
     },
 ]
+const nouns = ['view', 'photo', 'colors', 'pic', 'picture', 'scenery', 'spot', 'landscape', 'shot', 'frame'];
 
 // Extras
-
 const interjections = ['Wow! ', 'Wow, ', ''];
 const exclamationMarkArray = ['', '!', '!!'];
 const textTransform = [false, true];
@@ -264,7 +264,7 @@ function generateComment() {
         case 'Adverb + Adjective': 
         
             // Randomly get words according to pattern
-            adverb = getRandomItem(adverbs, typeAAadverbProbabilities);
+            adverb = getRandomItem(adverbs, type2adverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
             // Defines the output and if lower case will be applied or not
             output = `${interjection}${adverb.name} ${adverbAdjective.name}${exclamationMark}`;
@@ -299,8 +299,8 @@ function generateComment() {
 
         case 'Something about view or colors': 
             // Randomly get words according to pattern
-            noun = getRandomItem(nouns, typeVCnounProbabilities);
-            adverb = getRandomItem(adverbs, typeVCadverbProbabilities);
+            noun = getRandomItem(nouns, type6nounProbabilities);
+            adverb = getRandomItem(adverbs, type6adverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
             // Detects plural form. Defines the use of words in the output
             const isPlural = (noun === 'colors') ? true : false;
