@@ -318,13 +318,19 @@ function generateComment() {
     }
 }
 
-// Trigger event and rendering results to the DOM
+/**
+ * Trigger event and rendering results to the DOM
+ */
 document.getElementById('generate-comment').onclick=function(){
     const comment = generateComment();
     console.log(comment.type);
     document.getElementById('comment-text').innerHTML = comment.text;
 }
 
+/**
+ * Copies comment to clipboard
+ * @param {string} str - The string to be copied
+ */
 const copyToClipboard = str => {
     const el = document.createElement('textarea');
     el.value = str;
@@ -333,10 +339,26 @@ const copyToClipboard = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
-  
+
+/**
+ * Shows a Toast for copy-to-clipboard message
+ */
+function showToast() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
+    // Add the "show" class to DIV
+    x.className = "show";
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+}
+
+/**
+ * Copy comment to clipboard event
+ */
 document.getElementById('copy').onclick=function(){
     const str = document.getElementById('comment-text').innerHTML;
     if (str) {
         copyToClipboard(str);
+        showToast();
     }
 }
