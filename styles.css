@@ -93,7 +93,7 @@ a{
 
 #intro h1{
     font-size: 2.5rem;
-    margin: 3.5em 0 0 0;
+    margin: 2em 0 0 0;
     padding: 0;
     line-height: 1.2em;
     color: #fff;
@@ -127,9 +127,9 @@ a{
     background-color: #0064a0;
 }
 
-#features{
+#features{    
     width: 100%;
-    padding: 6em 0;
+    padding-top: 4em;
     display: flex;
     justify-content: space-evenly;
 }
@@ -165,88 +165,6 @@ a{
 width: 33%;
 float: left;
 box-sizing: border-box;
-}
-
-@media only screen and (max-width : 1090px) {
-    .container{
-    width: 50em;
-    }
-}
-
-@media only screen and (max-width : 950px) {
-    .container{
-    width: 100%;
-    padding: 0 3em;
-    box-sizing: border-box;
-    }
-}
-
-@media only screen and (max-width : 768px) {
-    #features{
-    margin-top: 3em;
-    }
-    #features .feature{
-    width: 50%;
-    border: 0;
-    padding: 0 2em;
-    margin-top: 3em;
-    }
-}
-
-@media only screen and (max-width : 720px) {
-    #logo, #nav{
-    float: none;
-    display: block;
-    margin: .75em auto;
-    }
-    #nav{
-    display: none;
-    }
-    #nav li{
-    width: 100%;
-    margin: 1em 0 0 0;
-    padding: 0;
-    text-align: center;
-    }
-    #intro h1{
-    font-size: 2em;
-    text-align: center;
-    margin: 0 0 .75em 0;
-    }
-    h2{
-    font-size: 1.2em;
-    text-align: center;
-    }
-    #intro input{
-    margin-top: 1em;
-    }
-    #features .feature{
-    width: 100%;
-    padding: 0;
-    margin-top: 2em;
-    }
-}
-
-@media only screen and (max-width : 570px) {
-    #intro h1{
-    font-size: 1.5em;
-    }
-    h2{
-    font-size: 1em;
-    }
-    #intro input.text{
-    width: 100%;
-    }
-}
-
-@media only screen and (max-width : 480px) {
-    .container{
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-    #features{
-        flex-direction: column;
-    }
 }
 
 /* COMMENT CSS */
@@ -305,6 +223,21 @@ box-sizing: border-box;
     border-radius: 0 0 0 8px;
     padding: 0 .3125rem;
 }
+#comment-info-wrapper {
+    width: 280px;
+    margin: 40px 0 0 80px;
+    font-size: .7rem; 
+    text-align: left;
+    height: 54px;
+}
+.comment-info {
+    margin: 0;
+    white-space: nowrap;
+}
+.info-key {
+    display: inline-block;
+    width: 128px;
+}
 
 /* Snackbar */
 
@@ -322,34 +255,122 @@ box-sizing: border-box;
     z-index: 1; /* Add a z-index if needed */
     left: 50%; /* Center the snackbar */
     bottom: 30px; /* 30px from the bottom */
-  }
+}
   
   /* Show the snackbar when clicking on a button (class added with JavaScript) */
-  #snackbar.show {
+#snackbar.show {
     visibility: visible; /* Show the snackbar */
     /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
     However, delay the fade out process for 2.5 seconds */
     -webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;
     animation: fadein 0.5s, fadeout 0.5s 1.5s;
-  }
+}
   
   /* Animations to fade the snackbar in and out */
-  @-webkit-keyframes fadein {
+@-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
-  }
+}
   
-  @keyframes fadein {
+@keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
-  }
+}
   
-  @-webkit-keyframes fadeout {
+@-webkit-keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
-  }
+}
   
-  @keyframes fadeout {
+@keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
-  }
+}
+  
+@media only screen and (max-width : 1090px) {
+    .container{
+        width: 50em;
+    }
+}
+
+@media only screen and (max-width : 950px) {
+    .container{
+        width: 100%;
+        padding: 0 3em;
+        box-sizing: border-box;
+    }
+}
+
+@media only screen and (max-width : 768px) {
+    #features{
+        margin-bottom: 2em;
+    }
+    #features .feature{
+        width: 50%;
+        border: 0;
+        padding: 0 2em;
+        margin-top: 3em;
+    }
+}
+
+@media only screen and (max-width : 720px) {
+    #logo, #nav{
+        float: none;
+        display: block;
+        margin: .75em auto;
+    }
+    #nav{
+        display: none;
+    }
+    #nav li{
+        width: 100%;
+        margin: 1em 0 0 0;
+        padding: 0;
+        text-align: center;
+    }
+    #intro h1{
+        font-size: 2em;
+        text-align: center;
+        margin: 0 0 .75em 0;
+    }
+    h2{
+        font-size: 1.2em;
+        text-align: center;
+    }
+    #intro input{
+        margin-top: 1em;
+    }
+    #features .feature{
+        width: 100%;
+        padding: 0;
+        margin-top: 2em;
+    }
+}
+
+@media only screen and (max-width : 570px) {
+    #intro h1{
+        font-size: 1.5em;
+    }
+    h2{
+        font-size: 1em;
+    }
+    #intro input.text{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width : 480px) {
+    .container{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    #features{
+        flex-direction: column;
+    }
+    #comment-info-wrapper {
+        width: 320px;
+        margin: 40px 0 0 0px;
+        font-size: .75rem;
+        text-align: left;
+    }
+}

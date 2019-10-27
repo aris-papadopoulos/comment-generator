@@ -244,7 +244,11 @@ function generateComment() {
 
             return {
                 text,
-                type: type.name
+                type: {
+                    name: type.name,
+                    interjection: (interjection === '') ? false : true,
+                    exclamationMark: (exclamationMark === '') ? false : true
+                }
             }
 
         case 'Adjective + Noun': 
@@ -258,7 +262,11 @@ function generateComment() {
 
             return {
                 text,
-                type: type.name
+                type: {
+                    name: type.name,
+                    interjection: (interjection === '') ? false : true,
+                    exclamationMark: (exclamationMark === '') ? false : true
+                }
             }
 
         case 'Adverb + Adjective': 
@@ -272,7 +280,11 @@ function generateComment() {
 
             return {
                 text,
-                type: type.name
+                type: {
+                    name: type.name,
+                    interjection: (interjection === '') ? false : true,
+                    exclamationMark: (exclamationMark === '') ? false : true
+                }
             }
 
         case 'Adverb + Adjective + Noun': 
@@ -287,14 +299,22 @@ function generateComment() {
 
             return {
                 text,
-                type: type.name
+                type: {
+                    name: type.name,
+                    interjection: (interjection === '') ? false : true,
+                    exclamationMark: (exclamationMark === '') ? false : true
+                }
             }
 
         case 'Interjection':
 
             return {
                 text: interjections[0],
-                type: 'Interjection'
+                type: {
+                    name: type.name,
+                    interjection: false,
+                    exclamationMark: false
+                }
             }
 
         case 'Something about view or colors': 
@@ -310,7 +330,11 @@ function generateComment() {
 
             return {
                 text,
-                type: type.name
+                type: {
+                    name: type.name,
+                    interjection: false,
+                    exclamationMark: (exclamationMark === '') ? false : true
+                }
             }
 
         default:
@@ -322,9 +346,20 @@ function generateComment() {
  * Trigger event and rendering results to the DOM
  */
 document.getElementById('generate-comment').onclick=function(){
+
+    // Run Generator Function
     const comment = generateComment();
-    console.log(comment.type);
+
+    // Render Comment
     document.getElementById('comment-text').innerHTML = comment.text;
+    
+    // Render Comment Info
+    const typeInfo = `\
+    <p class="comment-info"><span class="info-key">Comment Type: </span><span id="info-type">${comment.type.name}</span></p>\
+    <p class="comment-info"><span class="info-key">Interjection prefix: </span><span id="info-interjection">${(comment.type.interjection) ? '&#10004;' : '&#10006;'}</span></p>\
+    <p class="comment-info"><span class="info-key">Exclamation mark(s): </span><span id="info-exclamation">${(comment.type.exclamationMark) ? '&#10004;' : '&#10006;'}</span></p>\
+    `;
+    document.getElementById('comment-info-wrapper').innerHTML = typeInfo;
 }
 
 /**
