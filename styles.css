@@ -109,7 +109,7 @@ a{
 
 #intro .button{
     width: 100%;
-    max-width: 262px;
+    max-width: 282px;
     height: 48px;
     background-color: #0286c2;
     margin-left: calc(48px + .625rem);
@@ -171,9 +171,9 @@ box-sizing: border-box;
 /* COMMENT CSS */
 .comment__single {
     width: 100%;
-    max-width: 320px;
+    max-width: 340px;
     margin-top: 20px;
-    padding: 20px;
+    padding: 20px 10px;
     will-change: auto;
     -webkit-transition: opacity .3s ease;
     transition: opacity .3s ease;
@@ -212,7 +212,7 @@ box-sizing: border-box;
 .comment-text {
     display: inline-flex;
     align-items: center;
-    font-size: .825rem;
+    font-size: .775rem;
     width: calc(100% - 48px - .625rem);
     margin: 0 0 0 calc(48px + .625rem);
     color: #455a64;
@@ -226,7 +226,7 @@ box-sizing: border-box;
 }
 #comment-info-wrapper {
     width: 280px;
-    margin: 40px 0 0 80px;
+    margin: 40px 0 0 60px;
     font-size: .7rem; 
     text-align: left;
     height: 54px;
