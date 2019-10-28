@@ -212,7 +212,7 @@ box-sizing: border-box;
 .comment-text {
     display: inline-flex;
     align-items: center;
-    font-size: .875rem;
+    font-size: .825rem;
     width: calc(100% - 48px - .625rem);
     margin: 0 0 0 calc(48px + .625rem);
     color: #455a64;

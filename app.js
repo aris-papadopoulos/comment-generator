@@ -18,11 +18,12 @@ function weightedRand(spec) {
 }
 
 // Standard-Default Probabilities
-const typeProbabilities = { 0: 0.16, 1: 0.21, 2: 0.22, 3: 0.18, 4: 0.07, 5: 0.16 };
+const typeProbabilities = { 0: 0.16, 1: 0.21, 2: 0.22, 3: 0.18, 4: 0.07, 5: 0.16, 6: 0.20 };
 
 const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 };
 const adjectiveDefaultProbabilities = { 0: 0.12, 1: 0.12, 2: 0.12, 3: 0.10, 4: 0.10, 5: 0.07, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.08, 10: 0, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.10 };
 const nounDefaultProbabilities = { 0: 0.14, 1: 0.1, 2: 0.14, 3: 0.06, 4: 0.1, 5: 0.06, 6: 0.1, 7: 0.1, 8: 0.14, 9: 0.06 };
+const photoAttributesDefaultProbabilities = { 0: 0.15, 1: 0.12, 2: 0.15, 3: 0.12, 4: 0.08, 5: 0.10, 6: 0.08, 7: 0.08, 8: 0.08, 9: 0.12 }
 
 const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 };
 const exclamationMarkProbabilities = { 0: 0.25, 1: 0.55, 2: 0.2 };
@@ -31,35 +32,18 @@ const exclamationMarkProbabilities = { 0: 0.25, 1: 0.55, 2: 0.2 };
 const type2adverbProbabilities = { 0: 0.3, 1: 0, 2: 0, 3: 0, 4: 0.20, 5: 0.15, 6: 0.15, 7: 0.20, 8: 0, 9: 0 };
 const type4adverbProbabilities = { 0: 0, 1: 0.12, 2: 0.17, 3: 0.04, 4: 0.1, 5: 0.06, 6: 0.08, 7: 0, 8: 0.17, 9: 0.12 };
 const type6adverbProbabilities = { 0: 0.4, 1: 0, 2: 0, 3: 0, 4: 0.24, 5: 0.18, 6: 0.18, 7: 0, 8: 0, 9: 0 };
-const type6nounProbabilities = { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
-
+const type5nounProbabilities = { 0: 0.5, 1: 0, 2: 0.5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
+const type6adjectiveProbabilities = { 0: 0.15, 1: 0.15, 2: 0, 3: 0, 4: 0.10, 5: 0, 6: 0.10, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0.15, 12: 0.10, 13: 0.10, 14: 0 }
 
 // Comment Types
 const types = [
-    {
-        name: 'Adjective',
-        following: adjectiveDefaultProbabilities, // Use Default
-    },
-    {
-        name: 'Adjective + Noun',
-        following: adjectiveDefaultProbabilities // Use Default
-    },
-    {
-        name: 'Adverb + Adjective',
-        following: type2adverbProbabilities
-    },
-    {
-        name: 'Adverb + Adjective + Noun',
-        following: adjectiveDefaultProbabilities // Use Default
-    },
-    {
-        name: 'Interjection',
-        following: interjectionDefaultProbabilities // Use Default
-    },
-    {
-        name: 'Something about view or colors',
-        following: type6nounProbabilities
-    }
+    'Adjective', 
+    'Adjective + Noun', 
+    'Adverb + Adjective', 
+    'Adverb + Adjective + Noun', 
+    'Interjection', 
+    'Something about view or colors', 
+    'Photo attributes description'
 ]
 
 // Main Comment Entities
@@ -188,6 +172,7 @@ const adverbs = [
     },
 ]
 const nouns = ['view', 'photo', 'colors', 'pic', 'picture', 'scenery', 'spot', 'landscape', 'shot', 'frame'];
+const photoAttributes = ['composition', 'colors', 'light', 'details', 'atmosphere', 'angle', 'depth', 'contrast', 'technique', 'point of view'];
 
 // Extras
 const interjections = ['Wow! ', 'Wow, ', ''];
@@ -232,63 +217,56 @@ function generateComment() {
     // Randomly choose if the sentence will be lower case or not
     const lowerCase = getRandomItem(textTransform, lowerCaseProbabilities);
 
-    switch(type.name) {
+    switch(type) {
 
         case 'Adjective':
-
             // Randomly get words according to pattern
             adjective = getRandomItem(adjectives, adjectiveDefaultProbabilities);
             // Defines the output and if lower case will be applied or not
             output = `${interjection}${adjective.name}${exclamationMark}`;
             (lowerCase) ? text = output.toLowerCase() : text = output;
-
             return {
                 text,
                 type: {
-                    name: type.name,
+                    name: type,
                     interjection: (interjection === '') ? false : true,
                     exclamationMark: (exclamationMark === '') ? false : true
                 }
             }
 
         case 'Adjective + Noun': 
-
             // Randomly get words according to pattern
             adjective = getRandomItem(adjectives, adjectiveDefaultProbabilities);
             adjectiveNoun = getRandomItem(nouns, adjective.nouns);
             // Defines the output and if lower case will be applied or not
             output = `${interjection}${adjective.name} ${adjectiveNoun}${exclamationMark}`;
             (lowerCase) ? text = output.toLowerCase() : text = output;
-
             return {
                 text,
                 type: {
-                    name: type.name,
+                    name: type,
                     interjection: (interjection === '') ? false : true,
                     exclamationMark: (exclamationMark === '') ? false : true
                 }
             }
 
         case 'Adverb + Adjective': 
-        
             // Randomly get words according to pattern
             adverb = getRandomItem(adverbs, type2adverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
             // Defines the output and if lower case will be applied or not
             output = `${interjection}${adverb.name} ${adverbAdjective.name}${exclamationMark}`;
             (lowerCase) ? text = output.toLowerCase() : text = output;
-
             return {
                 text,
                 type: {
-                    name: type.name,
+                    name: type,
                     interjection: (interjection === '') ? false : true,
                     exclamationMark: (exclamationMark === '') ? false : true
                 }
             }
 
         case 'Adverb + Adjective + Noun': 
-
             // Randomly get words according to pattern
             adverb = getRandomItem(adverbs, type4adverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.type4adjectives);
@@ -296,22 +274,20 @@ function generateComment() {
             // Defines the output and if lower case will be applied or not
             output = `${interjection}${adverb.name} ${adverbAdjective.name} ${adjectiveNoun}${exclamationMark}`;
             (lowerCase) ? text = output.toLowerCase() : text = output;
-
             return {
                 text,
                 type: {
-                    name: type.name,
+                    name: type,
                     interjection: (interjection === '') ? false : true,
                     exclamationMark: (exclamationMark === '') ? false : true
                 }
             }
 
         case 'Interjection':
-
             return {
                 text: interjections[0],
                 type: {
-                    name: type.name,
+                    name: type,
                     interjection: false,
                     exclamationMark: false
                 }
@@ -319,7 +295,7 @@ function generateComment() {
 
         case 'Something about view or colors': 
             // Randomly get words according to pattern
-            noun = getRandomItem(nouns, type6nounProbabilities);
+            noun = getRandomItem(nouns, type5nounProbabilities);
             adverb = getRandomItem(adverbs, type6adverbProbabilities);
             adverbAdjective = getRandomItem(adjectives, adverb.adjectives);
             // Detects plural form. Defines the use of words in the output
@@ -327,11 +303,37 @@ function generateComment() {
             // Defines the output and if lower case will be applied or not
             output = `The ${noun} ${(isPlural) ? 'are' : 'is'} ${adverb.name.toLowerCase()} ${adverbAdjective.name}${exclamationMark}`;
             (lowerCase) ? text = output.toLowerCase() : text = output;
-
             return {
                 text,
                 type: {
-                    name: type.name,
+                    name: type,
+                    interjection: false,
+                    exclamationMark: (exclamationMark === '') ? false : true
+                }
+            }
+
+        case 'Photo attributes description':
+            // Gets adjective
+            adjective = getRandomItem(adjectives, type6adjectiveProbabilities);
+            // Gets first photo attribute
+            const getIndex1 = weightedRand(photoAttributesDefaultProbabilities);
+            const index1 = parseInt(getIndex1());
+            const attr1 = photoAttributes[index1];
+            // Ensure the 2nd attribute won't be the same as 1st
+            let attr2probabilities = photoAttributesDefaultProbabilities;
+            attr2probabilities[index1] = 0;
+            // Gets 2nd photo attribute
+            const getIndex2 = weightedRand(attr2probabilities);
+            const index2 = parseInt(getIndex2());
+            const attr2 = photoAttributes[index2];
+
+            // Defines the output and if lower case will be applied or not
+            output = `${adjective.name} ${attr1} and ${attr2}${exclamationMark}`;
+            (lowerCase) ? text = output.toLowerCase() : text = output;
+            return {
+                text,
+                type: {
+                    name: type,
                     interjection: false,
                     exclamationMark: (exclamationMark === '') ? false : true
                 }
