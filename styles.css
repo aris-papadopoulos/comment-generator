@@ -374,4 +374,8 @@ box-sizing: border-box;
         font-size: .75rem;
         text-align: left;
     }
+    #intro .button{
+        max-width: initial;
+        margin-left: 0;
+    }
 }
