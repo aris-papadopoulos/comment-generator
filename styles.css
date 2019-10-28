@@ -212,9 +212,9 @@ box-sizing: border-box;
 .comment-text {
     display: inline-flex;
     align-items: center;
-    font-size: .775rem;
+    font-size: .825rem;
     width: calc(100% - 48px - .625rem);
-    margin: 0 0 0 calc(48px + .625rem);
+    margin: 0 0 0 calc(42px + .625rem);
     color: #455a64;
     background: #eceff1;
     border-radius: 0 8px 8px 8px;
@@ -361,9 +361,9 @@ box-sizing: border-box;
 }
 
 @media only screen and (max-width : 480px) {
-    .container{
-        padding-left: 1em;
-        padding-right: 1em;
+    .container{    
+        padding-left: .5rem;
+        padding-right: .5rem;
     }
     #features{
         flex-direction: column;
