@@ -318,13 +318,17 @@ function generateComment() {
             // Gets first photo attribute
             const getIndex1 = weightedRand(photoAttributesDefaultProbabilities);
             const index1 = parseInt(getIndex1());
+            console.log(index1);
             const attr1 = photoAttributes[index1];
             // Ensure the 2nd attribute won't be the same as 1st
-            let attr2probabilities = photoAttributesDefaultProbabilities;
+            let attr2probabilities = Object.assign({}, photoAttributesDefaultProbabilities);
             attr2probabilities[index1] = 0;
             // Gets 2nd photo attribute
+            console.log(attr2probabilities, photoAttributesDefaultProbabilities);
             const getIndex2 = weightedRand(attr2probabilities);
+
             const index2 = parseInt(getIndex2());
+            console.log(index2);
             const attr2 = photoAttributes[index2];
 
             // Defines the output and if lower case will be applied or not
