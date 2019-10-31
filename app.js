@@ -23,7 +23,7 @@ const typeProbabilities = { 0: 0.16, 1: 0.21, 2: 0.22, 3: 0.18, 4: 0.07, 5: 0.16
 const adverbDefaultProbabilities = { 0: 0.15, 1: 0.10, 2: 0.15, 3: 0.10, 4: 0.10, 5: 0.05, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.05 };
 const adjectiveDefaultProbabilities = { 0: 0.12, 1: 0.12, 2: 0.12, 3: 0.10, 4: 0.10, 5: 0.07, 6: 0.10, 7: 0.10, 8: 0.10, 9: 0.08, 10: 0, 11: 0.10, 12: 0.10, 13: 0.10, 14: 0.10 };
 const nounDefaultProbabilities = { 0: 0.14, 1: 0.1, 2: 0.14, 3: 0.06, 4: 0.1, 5: 0.06, 6: 0.1, 7: 0.1, 8: 0.14, 9: 0.06 };
-const photoAttributesDefaultProbabilities = { 0: 0.15, 1: 0.12, 2: 0.15, 3: 0.12, 4: 0.08, 5: 0.10, 6: 0.08, 7: 0.08, 8: 0.08, 9: 0.12 }
+const photoAttributesDefaultProbabilities = { 0: 0.15, 1: 0.12, 2: 0.15, 3: 0.12, 4: 0.08, 5: 0.10, 6: 0.08, 7: 0.08, 8: 0.08, 9: 0.10, 10: 0.12 }
 
 const interjectionDefaultProbabilities = { 0: 0.04, 1: 0.03, 2: 0.93 };
 const exclamationMarkProbabilities = { 0: 0.25, 1: 0.55, 2: 0.2 };
@@ -172,7 +172,7 @@ const adverbs = [
     },
 ]
 const nouns = ['view', 'photo', 'colors', 'pic', 'picture', 'scenery', 'spot', 'landscape', 'shot', 'frame'];
-const photoAttributes = ['composition', 'colors', 'light', 'details', 'atmosphere', 'angle', 'depth', 'contrast', 'technique', 'point of view'];
+const photoAttributes = ['composition', 'colors', 'light', 'details', 'atmosphere', 'angle', 'depth', 'contrast', 'technique', 'framing', 'point of view'];
 
 // Extras
 const interjections = ['Wow! ', 'Wow, ', ''];
